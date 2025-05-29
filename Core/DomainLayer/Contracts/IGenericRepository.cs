@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,5 +15,13 @@ namespace DomainLayer.Contracts
         Task AddAsync(TEntity entity);
         void Update(TEntity entity);
         void Remove(TEntity entity);
+
+
+        Task<IEnumerable<TEntity>> GetAllAsync(ISpecification<TEntity, TKey> specification);
+        Task<TEntity?> GetByIdAsync(ISpecification<TEntity, TKey> specification);
+
+
+        Task<int> CountAsync(ISpecification<TEntity,TKey> specification);
+
     }
 }
