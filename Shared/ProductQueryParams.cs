@@ -1,0 +1,31 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Shared
+{
+    public class ProductQueryParams
+    {
+        public int? BrandId { get; set; }
+        public int? TypeId { get; set; }
+        public SortingProducts sortingProducts { get; set; }
+        public string? SearchValue { get; set; }
+
+        #region Pagination
+        public int PageIndex { get; set; } = 1;
+
+
+        private const int DefaultPageSize = 5;
+        private const int MaxPageSize = 10;
+
+        private int pageSize = DefaultPageSize;
+        public int PageSiza
+        {
+            get{ return pageSize; }
+            set{pageSize = value > MaxPageSize ? MaxPageSize : value;}
+        }
+        #endregion
+    }
+}
