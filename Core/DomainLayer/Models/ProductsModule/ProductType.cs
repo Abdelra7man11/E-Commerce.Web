@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.DataTrancfareObject
+namespace DomainLayer.Models.ProductsModule
 {
-    public class TypeDto
+    public class ProductType :BaseEntity<int>
     {
-        public int Id { get; set; }
         public string Name { get; set; } = default!;
+
     }
 }
