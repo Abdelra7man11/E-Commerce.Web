@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DomainLayer.Models
+namespace DomainLayer.Models.ProductsModule
 {
     public class Product : BaseEntity<int>
     {
@@ -16,5 +16,6 @@ namespace DomainLayer.Models
         public int BrandId { get; set; }  // FK
         public ProductType ProductType { get; set; }
         public int TypeId { get; set; }  // FK
+        public int Quantity { get; set; }
     }
 }

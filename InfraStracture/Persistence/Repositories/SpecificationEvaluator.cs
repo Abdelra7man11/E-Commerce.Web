@@ -11,8 +11,7 @@ namespace Persistence
 {
     static class SpecificationEvaluator
     {
-        public static IQueryable<TEntity> CreateQuery<TEntity, TKey>(IQueryable<TEntity> InputQuery,
-            ISpecification<TEntity, TKey> specification) where TEntity : BaseEntity<TKey>
+        public static IQueryable<TEntity> CreateQuery<TEntity, TKey>(IQueryable<TEntity> InputQuery, ISpecification<TEntity, TKey> specification) where TEntity : BaseEntity<TKey>
         {
             var Query = InputQuery;
 

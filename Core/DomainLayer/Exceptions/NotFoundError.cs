@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DomainLayer.Models
+namespace DomainLayer.Exceptions
 {
-    public class ProductBrand :BaseEntity<int>
+    public abstract class NotFoundError(string message):Exception(message)
     {
-        public string Name { get; set; } = default!;
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Shared;
-using Shared.DataTrancfareObject;
+using Shared.DataTrancfareObject.ProductsModuleDto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
