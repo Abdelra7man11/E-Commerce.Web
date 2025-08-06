@@ -21,14 +21,6 @@ namespace Shared.DataTrancfareObject.OrdersDto
 
 
 
-        public string PaymentIntentId { get; set; } 
-
-
-
-
-
-        public decimal DeliveryCost { get; set; }
-
     }
 
 }

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Exceptions
 {
-    public abstract class NotFoundError(string message):Exception($"Not Found {message}")
+    public sealed class OrderCannotCreated : Exception
     {
+      
     }
 }

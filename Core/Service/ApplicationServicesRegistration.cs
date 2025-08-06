@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DomainLayer.Contracts;
+using Microsoft.Extensions.DependencyInjection;
 using ServiceAbstraction;
 using System;
 using System.Collections.Generic;

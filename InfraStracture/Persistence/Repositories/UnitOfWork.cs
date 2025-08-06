@@ -19,12 +19,6 @@ namespace Persistence.Repositories
             //Get Type Name
             var typeName = typeof(TEntity).Name;
 
-            // Dic<string , object> ==> string KeY [Name of Type] -- Object From GenericRepsitory
-
-            //if (_repositories.ContainsKey(typeName))
-            //    return (IGenericRepository<TEntity, TKey>)_repositories[typeName];
-            //////----------------------------- Refactore -----
-
             if (repositories.TryGetValue(typeName, out object? value))
                 return (IGenericRepository<TEntity, TKey>)value;
 

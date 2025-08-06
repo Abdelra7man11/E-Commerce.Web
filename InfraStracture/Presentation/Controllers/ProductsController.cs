@@ -13,9 +13,9 @@ namespace Presentation.Controllers
 {
     public class ProductsController(IServiceManager _serviceManager) : ApiBaseController
     {
-        [Authorize]
+        //[Authorize]
         [HttpGet]
-        public async Task<ActionResult<PaginationResult<ProductDto>>> GetAllProduct([FromQuery]ProductQueryParams queryParams)
+        public async Task<ActionResult<PaginationResult<ProductDto>>> GetAllProduct([FromQuery] ProductQueryParams queryParams)
         {
             var products = await _serviceManager.ProductService.GetAllProductAsync(queryParams);
             return Ok(products);
