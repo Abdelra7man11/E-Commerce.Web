@@ -1,11 +1,4 @@
-﻿using Domain.Models.Orders;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Persistence.Data.Configurations
 {
@@ -14,10 +7,15 @@ namespace Persistence.Data.Configurations
         public void Configure(EntityTypeBuilder<DeliveryMethod> builder)
         {
             builder.ToTable("DeliveryMethods");
-            builder.Property(d => d.Price).HasColumnType("decimal(8,2)");
-            builder.Property(d => d.Description).HasColumnType("varchar(200)");
-            builder.Property(d => d.DeliveryTime).HasColumnType("varchar(20)");
-            builder.Property(d => d.ShortName).HasColumnType("varchar(10)");
+            builder.Property(d => d.Price)
+                .HasColumnType("decimal(8,2)");
+            builder.Property(d => d.ShortName)
+                .HasColumnType("varchar(50)");
+            builder.Property(d => d.Description)
+                .HasColumnType("varchar(100)");
+            builder.Property(d => d.DeliveryTime)
+                .HasColumnType("varchar")
+                .HasMaxLength(50);
 
         }
     }

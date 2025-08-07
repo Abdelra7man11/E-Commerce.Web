@@ -4,35 +4,22 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Persistence.Data.Configurations
 {
-    internal class OrderConfiguration:IEntityTypeConfiguration<Order>
+    internal class OrderConfiguration : IEntityTypeConfiguration<Order>
     {
+        public void Configure(EntityTypeBuilder<Order> builder)
+        {
+            builder.ToTable("Orders");
+            builder.Property(o=>o.SubTotal)
+                .HasColumnType("decimal(8,2)");
 
-public void Configure(EntityTypeBuilder<Order> builder)
-{
-    builder.ToTable("Orders");
-    builder.Property(d => d.SubTotal).HasColumnType("decimal(8,2)");
+            builder.HasMany(o => o.Items)
+                .WithOne();
 
-    // العلاقة مع OrderItems
-    builder.HasMany(o => o.Items)
-           .WithOne(oi => oi.Order)
-           .HasForeignKey(oi => oi.OrderId)
-           .OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(o => o.DeliveryMethod)
+                .WithMany()
+                .HasForeignKey(o => o.DeliveryMethodId);
 
-    // العلاقة مع DeliveryMethod
-    builder.HasOne(o => o.DeliveryMethod)
-           .WithMany()
-           .HasForeignKey(o => o.DeliveryMethodId)
-           .OnDelete(DeleteBehavior.Restrict)
-           .IsRequired();
-
-    // Owned Entity
-    builder.OwnsOne(o => o.Address, a => {
-        a.Property(aa => aa.City).HasColumnType("nvarchar(50)");
-        a.Property(aa => aa.Street).HasColumnType("nvarchar(100)");
-        a.Property(aa => aa.Country).HasColumnType("nvarchar(50)");
-        a.Property(aa => aa.FirstName).HasColumnType("nvarchar(50)");
-        a.Property(aa => aa.LastName).HasColumnType("nvarchar(50)");
-    });
+            builder.OwnsOne(o => o.Address);
         }
     }
 }

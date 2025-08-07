@@ -24,6 +24,7 @@ namespace Service
         private readonly Lazy<IOrderService> _LazyOrderService =
             new Lazy<IOrderService>(() => new OrderService(_mapper, _basketRepository, _unitOfWork));
 
+
         public IProductService ProductService => _LazyproductService.Value;
         public IBasketService BasketService => _LazyBasketService.Value;
         public IAuthenticationService AuthenticationService => _LazyAuthenticationService.Value;

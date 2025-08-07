@@ -14,21 +14,11 @@ namespace Persistence.Data.Configurations
         public void Configure(EntityTypeBuilder<OrderItem> builder)
         {
             builder.ToTable("OrderItems");
-            builder.Property(d => d.Price).HasColumnType("decimal(8,2)");
-
-            // العلاقة مع Order
-            builder.HasOne(oi => oi.Order)
-                   .WithMany(o => o.Items)
-                   .HasForeignKey(oi => oi.OrderId)
-                   .OnDelete(DeleteBehavior.Cascade)
-                   .IsRequired();
+            builder.Property(oi => oi.Price)
+                .HasColumnType("decimal(8,2)");
 
             // Owned Entity
-            builder.OwnsOne(oi => oi.Product, p =>
-            {
-                p.Property(pp => pp.ProductName).HasColumnType("nvarchar(100)");
-                p.Property(pp => pp.PictureUrl).HasColumnType("nvarchar(200)");
-            });
+            builder.OwnsOne(oi => oi.Product);
         }
     }
 }

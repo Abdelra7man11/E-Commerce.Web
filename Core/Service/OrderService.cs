@@ -4,6 +4,7 @@ using DomainLayer.Contracts;
 using DomainLayer.Exceptions;
 using DomainLayer.Models.OrderModule;
 using DomainLayer.Models.ProductsModule;
+using Microsoft.Extensions.Logging;
 using ServiceAbstraction;
 using Services.Specifications;
 using Shared.DataTrancfareObject.IdentityDto;
@@ -17,7 +18,7 @@ namespace Services
 
         public async Task<OrderToReturnDTo> CreateOrderAsync(OrderDTo OrderDTo, string Email)
         {
-         
+
             // Map Address To Order Address
             var OrderAddress = _mapper.Map<AddressDTO, OrderAddress>(OrderDTo.Address);
             // Get Basket
@@ -33,40 +34,21 @@ namespace Services
                     ?? throw new ProductNotFoundError(item.Id);
                 orderItems.Add(CreateOrderItem(item, product));
             }
-                // Get Delivery Method
-                var Delivery = await _unitOfWork.GetRepository<DeliveryMethod, int>().GetByIdAsync(OrderDTo.DeliveryMethodId)
-                    ?? throw new DeliveryMethodNotFoundException(OrderDTo.DeliveryMethodId);
-                // Calculate Sub Total
-                var SubTotal = orderItems.Sum(I => I.Quantity * I.Price);
+            // Get Delivery Method
+            var Delivery = await _unitOfWork.GetRepository<DeliveryMethod, int>().GetByIdAsync(OrderDTo.DeliveryMethodId)
+                ?? throw new DeliveryMethodNotFoundException(OrderDTo.DeliveryMethodId);
+            // Calculate Sub Total
+            var SubTotal = orderItems.Sum(I => I.Quantity * I.Price);
 
-                var Order = new Order(Email, OrderAddress, Delivery, orderItems, SubTotal);
+            var Order = new Order(Email, OrderAddress, Delivery, orderItems, SubTotal);
 
-                //await _unitOfWork.GetRepository<Order, Guid>().AddAsync(Order);
-                //await _unitOfWork.SaveChangesAsync();
-            try
-            {
-                await _unitOfWork.GetRepository<Order, Guid>().AddAsync(Order);
-                var result = await _unitOfWork.SaveChangesAsync(); // تأكد من وجود await
+            await _unitOfWork.GetRepository<Order, Guid>().AddAsync(Order);
 
-            }
-            catch (Exception ex)
-            {
-                // معالجة الخطأ
-                throw; // إعادة رفع الخطأ للحفاظ على التتبع
-            }
+            await _unitOfWork.SaveChangesAsync();
+
             return _mapper.Map<Order, OrderToReturnDTo>(Order);
-            
-        }
-        private static OrderItem CreateOrderItem(DomainLayer.Models.BasketModule.BasketItem item, Product product)
-        {
-            return new OrderItem()
-            {
-                Product = new ProductItemOrder() { ProductId = product.Id, PictureUrl = product.PictureUrl, ProductName = product.Name },
-                Price = product.Price,
-                Quantity = item.Quantity,
-            };
-        }
 
+        }
         public async Task<IEnumerable<DeliveryMethodDTo>> GetDeliveryMethodsAsync()
         {
             var deliveryMethods = await _unitOfWork.GetRepository<DeliveryMethod, int>().GetAllAsync();
@@ -89,7 +71,15 @@ namespace Services
 
             return _mapper.Map<OrderToReturnDTo>(order);
         }
-
+        private static OrderItem CreateOrderItem(DomainLayer.Models.BasketModule.BasketItem item, Product product)
+        {
+            return new OrderItem()
+            {
+                Product = new ProductItemOrdered() { ProductId = product.Id, PictureUrl = product.PictureUrl, ProductName = product.Name },
+                Price = product.Price,
+                Quantity = item.Quantity,
+            };
+        }
 
     }
 }
