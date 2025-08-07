@@ -12,6 +12,8 @@ using Persistence.Repositories;
 using Service;
 using Service.MappingProfile;
 using ServiceAbstraction;
+using Swashbuckle.AspNetCore.SwaggerUI;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace E_Commerce.Web
@@ -39,14 +41,29 @@ namespace E_Commerce.Web
 
             await app.AddDataSeedAsync();
 
-            #region Configure the HTTP request pipeline.
+            // Configure the HTTP request pipeline.
 
 
             app.UseCustomExceptionMiddleWare();
 
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwagerMiddleWare();
+                app.UseSwagger();
+                app.UseSwaggerUI(options =>
+                {
+                    options.ConfigObject = new ConfigObject()
+                    {
+                        DisplayRequestDuration = true
+                    };
+                    options.DocumentTitle = " E-Commerce API";
+                    options.JsonSerializerOptions = new JsonSerializerOptions()
+                    {
+                        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                    };
+                    options.DocExpansion(DocExpansion.None);
+                    options.EnableFilter();
+                    options.EnablePersistAuthorization();
+                });
             }
 
             app.UseHttpsRedirection();
@@ -56,7 +73,7 @@ namespace E_Commerce.Web
             app.UseAuthorization();
             app.MapControllers();
 
-            #endregion
+
 
             app.Run();
         }

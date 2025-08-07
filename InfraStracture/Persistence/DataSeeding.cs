@@ -34,7 +34,7 @@ namespace Persistence
                 }
                 if (!_dbContext.Set<ProductBrand>().Any())
                 {
-                    var ProductBrandData = File.OpenRead(@"..\InfraStracture\Persistence\Data\DataSeed\brands.json");
+                 using var ProductBrandData = File.OpenRead(@"..\InfraStracture\Persistence\Data\DataSeed\brands.json");
                     // Convert From JSON FIle TO List
                     var ProductBrand = await JsonSerializer.DeserializeAsync<List<ProductBrand>>(ProductBrandData);
                     if (ProductBrand != null && ProductBrand.Any())
@@ -43,7 +43,7 @@ namespace Persistence
                 }
                 if (!_dbContext.Set<ProductType>().Any())
                 {
-                    var ProductTypesData = File.OpenRead(@"..\InfraStracture\Persistence\Data\DataSeed\types.json");
+                    using var ProductTypesData = File.OpenRead(@"..\InfraStracture\Persistence\Data\DataSeed\types.json");
                     // Convert From JSON FIle TO List
                     var ProductTypes = await JsonSerializer.DeserializeAsync<List<ProductType>>(ProductTypesData);
                     if (ProductTypes != null && ProductTypes.Any())
@@ -52,7 +52,7 @@ namespace Persistence
                 }
                 if (!_dbContext.Set<Product>().Any())
                 {
-                    var ProductsData = File.OpenRead(@"..\InfraStracture\Persistence\Data\DataSeed\products.json");
+                    using var ProductsData = File.OpenRead(@"..\InfraStracture\Persistence\Data\DataSeed\products.json");
                     // Convert From JSON FIle TO List
                     var Products = await JsonSerializer.DeserializeAsync<List<Product>>(ProductsData);
                     if (Products != null && Products.Any())
@@ -73,8 +73,7 @@ namespace Persistence
             }
             catch (Exception ex)
             {
-                //TODO
-                Console.WriteLine(ex.Message);
+               // Go TO Error Page
 
             }
         }

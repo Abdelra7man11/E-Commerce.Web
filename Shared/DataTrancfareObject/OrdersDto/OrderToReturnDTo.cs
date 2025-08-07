@@ -12,7 +12,7 @@ namespace Shared.DataTrancfareObject.OrdersDto
         public Guid Id { get; set; }
         public string UserEmail { get; set; } = default!;
         public DateTimeOffset OrderDate { get; set; } //HERE
-        public AddressDTO ShipToAddress { get; set; } =default!;
+        public AddressDTO Address { get; set; } =default!;
         public string DeliveryMethod { get; set; } = default!;
         public string OrderStatus { get; set; } = default!; //HERE
         public ICollection<OrderItemDTo> Items { get; set; } = [];//Nav Prop

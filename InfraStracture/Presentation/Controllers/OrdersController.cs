@@ -8,21 +8,21 @@ using System.Security.Claims;
 
 namespace Presentation.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class OrdersController(IServiceManager _serviceManager) : ApiBaseController
     {
         //Create Order
-       
+
         [HttpPost]
         public async Task<ActionResult<OrderToReturnDTo>> CreateAsync(OrderDTo orderDTo)
         {
-            
+
             var res = await _serviceManager.OrderService.CreateOrderAsync(orderDTo, GetEmailFromToken());
             return Ok(res);
         }
 
-        // Get DeliveryMethod
-        //[AllowAnonymous]
+        //Get DeliveryMethod
+       [AllowAnonymous]
         [HttpGet("deliveryMethods")]
         public async Task<ActionResult<IEnumerable<DeliveryMethodDTo>>> GetDeliveryMethods()
         {
