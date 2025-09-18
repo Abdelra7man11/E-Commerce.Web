@@ -33,9 +33,9 @@ namespace Service
             var User = await _userManager.FindByEmailAsync(Email) ?? throw new UserNotFoundException(Email);
             return new UserDTO()
             {
-                DisplayName = User.DisplayName,
-                Email = User.Email,
-                Token = await CreateTokenAsync(User)
+                displayName = User.DisplayName,
+                email = User.Email,
+                token = await CreateTokenAsync(User)
             };
 
         }
@@ -76,7 +76,7 @@ namespace Service
 
         }
 
-
+        // Login User
         public async Task<UserDTO> LoginAsync(LoginDTO loginDTO)
         {
             // Check If Email Is Exists
@@ -87,9 +87,9 @@ namespace Service
             if (IsPasswordValid)
                 return new UserDTO()
                 {
-                    DisplayName = User.DisplayName,
-                    Email = User.Email,
-                    Token = await CreateTokenAsync(User)
+                    displayName = User.DisplayName,
+                    email = User.Email,
+                    token = await CreateTokenAsync(User)
                 };
             else
                 throw new UnauthorizedException();
@@ -111,9 +111,9 @@ namespace Service
             if (Result.Succeeded)
                 return new UserDTO()
                 {
-                    DisplayName = User.DisplayName,
-                    Email = User.Email,
-                    Token = await CreateTokenAsync(User)
+                    displayName = User.DisplayName,
+                    email = User.Email,
+                    token = await CreateTokenAsync(User)
                 };
             else
             {

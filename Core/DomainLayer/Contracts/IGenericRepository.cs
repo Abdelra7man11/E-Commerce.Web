@@ -5,16 +5,16 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-
+    
 namespace DomainLayer.Contracts
 {
     public  interface IGenericRepository <TEntity ,TKey> where TEntity : BaseEntity<TKey>
     {
-        Task<IEnumerable<TEntity>> GetAllAsync();
-        Task<TEntity> GetByIdAsync (TKey id);
-        Task AddAsync(TEntity entity);
-        void Update(TEntity entity);
-        void Remove(TEntity entity);
+        Task<IEnumerable<TEntity>> GetAllAsync(); // Get all entities
+        Task<TEntity> GetByIdAsync (TKey id);  // Get entity by id
+        Task AddAsync(TEntity entity);  // Add new entity
+        void Update(TEntity entity); // Update existing entity
+        void Remove(TEntity entity);  // Delete entity
 
 
         Task<IEnumerable<TEntity>> GetAllAsync(ISpecification<TEntity, TKey> specification);

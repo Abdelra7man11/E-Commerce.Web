@@ -8,38 +8,38 @@ namespace Service.Specification
         // GetAll Product With Brand And Type
         public ProductWithBrandSpecification(ProductQueryParams queryParams) : base(
             P =>
-            (!queryParams.BrandId.HasValue || P.BrandId == queryParams.BrandId) 
+            (!queryParams.BrandId.HasValue || P.BrandId == queryParams.BrandId)
             && (!queryParams.TypeId.HasValue || P.TypeId == queryParams.TypeId)
-            && (string.IsNullOrEmpty(queryParams.SearchValue) || P.Name.ToLower().Contains(queryParams.SearchValue.ToLower()))
+            && (string.IsNullOrEmpty(queryParams.Search) || P.Name.ToLower().Contains(queryParams.Search.ToLower()))
             )
         {
             AddInclude(P => P.ProductBrand);
             AddInclude(P => P.ProductType);
 
-            switch (queryParams.sortingProducts)
+            switch (queryParams.Sort)
             {
                 case
                     SortingProducts.NameAsc:
-                        AddOrderBy(P => P.Name);
+                    AddOrderBy(P => P.Name);
                     break;
                 case
                     SortingProducts.NameDesc:
-                        AddOrderByDesc(P => P.Name);
+                    AddOrderByDesc(P => P.Name);
                     break;
                 case
                     SortingProducts.PriceAsc:
-                        AddOrderBy(P => P.Price);
+                    AddOrderBy(P => P.Price);
                     break;
                 case
                     SortingProducts.PriceDesc:
-                        AddOrderByDesc(P => P.Price);
+                    AddOrderByDesc(P => P.Price);
                     break;
                 default:
                     break;
 
             }
 
-            ApplyPagination(queryParams.PageSiza, queryParams.PageIndex);
+            ApplyPagination(queryParams.PageSize, queryParams.PageNumber);
         }
 
         // Get Product Id

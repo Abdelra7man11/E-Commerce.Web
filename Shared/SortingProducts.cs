@@ -8,6 +8,9 @@ namespace Shared
 {
     public enum SortingProducts
     {
-        NameDesc=1, NameAsc=2, PriceDesc=3, PriceAsc=4
+        NameDesc = 1,
+        NameAsc = 2,
+        PriceDesc = 3,
+        PriceAsc = 4
     }
 }

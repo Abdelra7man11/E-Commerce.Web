@@ -10,22 +10,25 @@ namespace Shared
     {
         public int? BrandId { get; set; }
         public int? TypeId { get; set; }
-        public SortingProducts sortingProducts { get; set; }
-        public string? SearchValue { get; set; }
+        public SortingProducts Sort { get; set; }
+        public string? Search { get; set; }
 
         #region Pagination
-        public int PageIndex { get; set; } = 1;
-
-
         private const int DefaultPageSize = 5;
         private const int MaxPageSize = 10;
 
-        private int pageSize = DefaultPageSize;
-        public int PageSiza
+        private int _pageSize = DefaultPageSize;
+
+        public int PageNumber { get; set; } = 1;
+
+        public int PageSize
         {
-            get{ return pageSize; }
-            set{pageSize = value > MaxPageSize ? MaxPageSize : value;}
+            get => _pageSize;
+            set => _pageSize = value <= 0
+                ? DefaultPageSize                   // fallback if invalid
+                : Math.Min(value, MaxPageSize);     // clamp to MaxPageSize
         }
+
         #endregion
     }
 }

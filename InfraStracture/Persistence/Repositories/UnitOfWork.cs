@@ -11,15 +11,15 @@ namespace Persistence.Repositories
 {
     public class UnitOfWork(StoreDbContext _dbContext) : IUnitOfWork
     {
+        // To Cache Repository 
         private readonly Dictionary<string, object> repositories = [];
 
-        public IGenericRepository<TEntity, TKey> GetRepository<TEntity, TKey>()
-            where TEntity : BaseEntity<TKey>
+        public IGenericRepository<TEntity, TKey> GetRepository<TEntity, TKey>() where TEntity : BaseEntity<TKey>
         {
             //Get Type Name
             var typeName = typeof(TEntity).Name;
 
-            if (repositories.TryGetValue(typeName, out object? value))
+            if (repositories.TryGetValue(typeName, out object?   value))
                 return (IGenericRepository<TEntity, TKey>)value;
 
 
@@ -27,7 +27,7 @@ namespace Persistence.Repositories
             {
                 // Create Object
                 var Repo = new GenericRepository<TEntity, TKey>(_dbContext);
-                // Store Object In Dic
+                // Store Object In Dictionary
                 repositories.Add(typeName, Repo);
                 // Return Object
                 return Repo;

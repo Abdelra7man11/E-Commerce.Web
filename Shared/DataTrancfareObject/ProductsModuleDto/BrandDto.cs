@@ -8,7 +8,7 @@ namespace Shared.DataTrancfareObject.ProductsModuleDto
 {
     public class BrandDto
     {
-        public int Id { get; set; }
-        public string Name { get; set; } = default!;
+        public int id { get; set; }
+        public string name { get; set; } = default!;
     }
 }

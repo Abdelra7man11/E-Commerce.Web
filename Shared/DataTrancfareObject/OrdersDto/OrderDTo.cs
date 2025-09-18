@@ -9,9 +9,9 @@ namespace Shared.DataTrancfareObject.OrdersDto
 {
     public class OrderDTo
     {
-        public string BasketId { get; set; } =default!;
-        public int DeliveryMethodId { get; set; }
-        public AddressDTO Address { get; set; } = default!;
+        public string basketId { get; set; } =default!;
+        public int deliveryMethodId { get; set; }
+        public AddressDTO shipToAddress { get; set; } = default!;
 
 
     }

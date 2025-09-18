@@ -8,7 +8,11 @@ namespace Shared.DataTrancfareObject.BasketModuleDto
 {
     public class BasketDto
     {
-        public string Id { get; set; } // Guid  Created From FrontEnd
-        public ICollection<BasketItemDto> Items { get; set; } = [];
+        public string id { get; set; } // Guid  Created From FrontEnd
+        public ICollection<BasketItemDto> items { get; set; } = [];
+        public string? clientSecret { get; set; }
+        public string? paymentIntentId { get; set; }
+        public decimal? deliveryMethodId { get; set; }
+        public decimal? shippingPrice { get; set; }
     }
 }

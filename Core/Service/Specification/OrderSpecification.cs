@@ -8,22 +8,21 @@ using System.Threading.Tasks;
 
 namespace Services.Specifications
 {
-     class OrderSpesifications : BaseSpecification<Order , Guid>
+     class OrderSpecification : BaseSpecification<Order , Guid>
     {
         //For GetAll
-        public OrderSpesifications(string email) : base(o => o.UserEmail == email)
+        public OrderSpecification(string email) : base(o => o.buyerEmail == email)
         {
             AddInclude(o => o.DeliveryMethod);
             AddInclude(o => o.Items);
             AddOrderByDesc(o=>o.OrderDate);
         }
         //For Get By Id
-        public OrderSpesifications(Guid id):base(o=>o.Id == id)
+        public OrderSpecification(Guid id):base(o=>o.Id == id)
         {
             AddInclude(o => o.Items);
             AddInclude(o => o.DeliveryMethod);
         }
-
 
     }
 }
