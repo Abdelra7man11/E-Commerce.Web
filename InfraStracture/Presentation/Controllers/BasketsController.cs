@@ -5,14 +5,14 @@ using Shared.DataTrancfareObject.BasketModuleDto;
 namespace Presentation.Controllers
 {
  
-    public class BasketController(IServiceManager _serviceManager) : ApiBaseController
+    public class BasketsController(IServiceManager _serviceManager) : ApiBaseController
     {
 
         // Get Basket
         [HttpGet] // GET BaseUrl/api/Basket
         public async Task<ActionResult<BasketDto>> GetBasket(string key)
         {
-            var basket = await _serviceManager.BasketService.GetBasketAsync (key);
+            var basket = await _serviceManager.BasketService.GetBasketAsync(key);
             return Ok(basket);
         }
 

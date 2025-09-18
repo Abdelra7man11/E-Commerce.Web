@@ -10,13 +10,13 @@ namespace Shared.DataTrancfareObject.ProductsModuleDto
     public class ProductDto
     {
 
-        public int Id { get; set; }
-        public string Name { get; set; } = default!;
-        public string Description { get; set; } = default!;
-        public string PictureUrl { get; set; } = default!;
-        public decimal Price { get; set; }
-        public string BrandName { get; set; } = default!;
-        public string TypeName { get; set; } = default!;
+        public int id { get; set; }
+        public string name { get; set; } = default!;
+        public string description { get; set; } = default!;
+        public string pictureUrl { get; set; } = default!;
+        public decimal price { get; set; }
+        public string productBrand { get; set; } = default!;
+        public string productType { get; set; } = default!;
 
     }
 }

@@ -20,23 +20,25 @@ namespace Persistence
                 Query = Query.Where(specification.Criteria);
             }
 
-            if(specification.OrderBy is not null)
+            if (specification.OrderBy is not null)
             {
                 Query = Query.OrderBy(specification.OrderBy);
-            } 
-            if(specification.OrderByDesc is not null)
+            }
+
+            if (specification.OrderByDesc is not null)
             {
                 Query = Query.OrderByDescending(specification.OrderByDesc);
             }
 
             if (specification.IncludeExpressions is not null && specification.IncludeExpressions.Count > 0)
             {
-                Query = specification.IncludeExpressions.Aggregate(Query, (CurrentQuery, IncludeExp) => CurrentQuery.Include(IncludeExp));
+                Query = specification.IncludeExpressions.Aggregate(Query, (CurrentQuery, IncludeExp)
+                    => CurrentQuery.Include(IncludeExp));
             }
 
             if (specification.IsPaginated)
             {
-                Query=Query.Skip(specification.Skip).Take(specification.Take);
+                Query = Query.Skip(specification.Skip).Take(specification.Take);
             }
 
             return Query;

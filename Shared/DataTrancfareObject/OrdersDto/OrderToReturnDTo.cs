@@ -9,15 +9,16 @@ namespace Shared.DataTrancfareObject.OrdersDto
 {
     public class OrderToReturnDTo
     {
-        public Guid Id { get; set; }
-        public string UserEmail { get; set; } = default!;
-        public DateTimeOffset OrderDate { get; set; } //HERE
-        public AddressDTO Address { get; set; } =default!;
-        public string DeliveryMethod { get; set; } = default!;
-        public string OrderStatus { get; set; } = default!; //HERE
-        public ICollection<OrderItemDTo> Items { get; set; } = [];//Nav Prop
-        public decimal SubTotal { get; set; } = default!;
-        public decimal Total { get; set; } = default!;
+        public Guid id { get; set; }
+        public string buyerEmail { get; set; } = default!;
+        public DateTimeOffset orderDate { get; set; } //HERE
+        public ICollection<OrderItemDTo> items { get; set; } = [];//Nav Prop
+        public AddressDTO shipToAddress { get; set; } =default!;
+        public string deliveryMethod { get; set; } = default!;
+        public decimal deliveryCost { get; set; } = default!;
+        public string status { get; set; } = default!; //HERE
+        public decimal subtotal { get; set; } = default!;
+        public decimal total { get; set; } = default!;
 
 
 

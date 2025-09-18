@@ -27,7 +27,22 @@ namespace E_Commerce.Web
 
 
             #region  Add services to the container.
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddJsonOptions(option =>
+            {
+                option.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
+            }); // To Request convert to CamelCase
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAngular", policy =>
+                {
+                    policy.WithOrigins("http://localhost:4200")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                });
+            });
+
+
 
             builder.Services.AddSwagerServices();
             builder.Services.AddInfraStractureServices(builder.Configuration);
@@ -68,7 +83,7 @@ namespace E_Commerce.Web
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseRouting();
+            app.UseCors("AllowAngular"); // to config angular
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();

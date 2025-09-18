@@ -15,15 +15,15 @@ namespace Services
 {
     public class OrderService(IMapper _mapper, IBasketRepository _basketRepository, IUnitOfWork _unitOfWork) : IOrderService
     {
-
+        // Create Order
         public async Task<OrderToReturnDTo> CreateOrderAsync(OrderDTo OrderDTo, string Email)
         {
 
             // Map Address To Order Address
-            var OrderAddress = _mapper.Map<AddressDTO, OrderAddress>(OrderDTo.Address);
+            var OrderAddress = _mapper.Map<AddressDTO, OrderAddress>(OrderDTo.shipToAddress);
             // Get Basket
-            var Basket = await _basketRepository.GetBasketAsync(OrderDTo.BasketId)
-                        ?? throw new BasketNotFoundException(OrderDTo.BasketId);
+            var Basket = await _basketRepository.GetBasketAsync(OrderDTo.basketId)
+                        ?? throw new BasketNotFoundException(OrderDTo.basketId);
 
             // Create OrderItem List
             List<OrderItem> orderItems = [];
@@ -35,8 +35,8 @@ namespace Services
                 orderItems.Add(CreateOrderItem(item, product));
             }
             // Get Delivery Method
-            var Delivery = await _unitOfWork.GetRepository<DeliveryMethod, int>().GetByIdAsync(OrderDTo.DeliveryMethodId)
-                ?? throw new DeliveryMethodNotFoundException(OrderDTo.DeliveryMethodId);
+            var Delivery = await _unitOfWork.GetRepository<DeliveryMethod, int>().GetByIdAsync(OrderDTo.deliveryMethodId)
+                ?? throw new DeliveryMethodNotFoundException(OrderDTo.deliveryMethodId);
             // Calculate Sub Total
             var SubTotal = orderItems.Sum(I => I.Quantity * I.Price);
 
@@ -49,6 +49,8 @@ namespace Services
             return _mapper.Map<Order, OrderToReturnDTo>(Order);
 
         }
+
+        // Get All DeliveryMethod
         public async Task<IEnumerable<DeliveryMethodDTo>> GetDeliveryMethodsAsync()
         {
             var deliveryMethods = await _unitOfWork.GetRepository<DeliveryMethod, int>().GetAllAsync();
@@ -56,17 +58,19 @@ namespace Services
 
         }
 
+        // Get All Orders
         public async Task<IEnumerable<OrderToReturnDTo>> GetAllOrderAsync(string email)
         {
-            var spec = new OrderSpesifications(email);
+            var spec = new OrderSpecification(email);
             var orders = await _unitOfWork.GetRepository<Order, Guid>().GetAllAsync(spec);
 
             return _mapper.Map<IEnumerable<Order>, IEnumerable<OrderToReturnDTo>>(orders);
         }
 
+        // Get Order By Id
         public async Task<OrderToReturnDTo> GetOrderByIdAsync(Guid id)
         {
-            var spec = new OrderSpesifications(id);
+            var spec = new OrderSpecification(id);
             var order = await _unitOfWork.GetRepository<Order, Guid>().GetByIdAsync(spec);
 
             return _mapper.Map<OrderToReturnDTo>(order);

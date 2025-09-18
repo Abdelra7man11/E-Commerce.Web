@@ -8,10 +8,10 @@ namespace Shared.DataTrancfareObject.OrdersDto
 {
     public class DeliveryMethodDTo
     {
-        public int Id { get; set; }
-        public string ShortName { get; set; } = default!;
-        public string Description { get; set; } = default!;
-        public string DeliveryTime { get; set; } = default!;
-        public decimal Price { get; set; }
+        public int id { get; set; }
+        public string shortName { get; set; } = default!;
+        public string description { get; set; } = default!;
+        public string deliveryTime { get; set; } = default!;
+        public decimal price { get; set; }
     }
 }

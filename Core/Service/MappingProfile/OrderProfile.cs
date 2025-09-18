@@ -14,12 +14,12 @@ namespace Services.MappingProfiles
             CreateMap<AddressDTO, OrderAddress>().ReverseMap();
 
             CreateMap<Order, OrderToReturnDTo>()
-                .ForMember(dest => dest.DeliveryMethod,
+                .ForMember(dest => dest.deliveryMethod,
                 opt => opt.MapFrom(src => src.DeliveryMethod.ShortName));
 
             CreateMap<OrderItem, OrderItemDTo>()
-                .ForMember(dest => dest.ProductName, opt => opt.MapFrom(S => S.Product.ProductName))
-                .ForMember(dest => dest.PictureUrl, opt => opt.MapFrom<OrderItemPictureUrlResolver>());
+                .ForMember(dest => dest.productName, opt => opt.MapFrom(S => S.Product.ProductName))
+                .ForMember(dest => dest.pictureUrl, opt => opt.MapFrom<OrderItemPictureUrlResolver>());
 
             CreateMap<DeliveryMethod, DeliveryMethodDTo>();
         }

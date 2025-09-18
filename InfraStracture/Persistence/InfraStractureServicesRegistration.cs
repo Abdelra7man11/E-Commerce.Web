@@ -19,9 +19,11 @@ namespace Persistence
             options.UseSqlServer(Configuration.GetConnectionString("DefultConnection"))
             );
 
+            // Services REgistration
             Services.AddScoped<IDataSeeding, DataSeeding>();
             Services.AddScoped<IUnitOfWork, UnitOfWork>();
             Services.AddScoped<IBasketRepository, BasketRepository>();
+            Services.AddScoped<ICacheRepository, CacheRepository>();
 
             //Redis Memory
             Services.AddSingleton<IConnectionMultiplexer>((_) =>

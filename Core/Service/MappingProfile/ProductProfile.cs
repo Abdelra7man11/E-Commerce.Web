@@ -9,19 +9,21 @@ using System.Threading.Tasks;
 
 namespace Service.MappingProfile
 {
-    public class ProductProfile :Profile
+
+    public class ProductProfile : Profile
     {
         public ProductProfile()
         {
             CreateMap<Product, ProductDto>()
-                .ForMember(dis => dis.BrandName, Options => Options.MapFrom(src => src.ProductBrand.Name))
-                .ForMember(dis => dis.TypeName, Options => Options.MapFrom(src => src.ProductType.Name))
-                .ForMember(dis => dis.PictureUrl, Option => Option.MapFrom<PictureUrlResolver>());
-                //.ForMember(dis => dis.PictureUrl, Options => Options.MapFrom(src => $"https://localhost:7112/{src.PictureUrl}")) // The Manual Way
-
+                .ForMember(dest => dest.name, opt => opt.MapFrom(src => src.Name))                       
+                .ForMember(dest => dest.productBrand, opt => opt.MapFrom(src => src.ProductBrand.Name))   
+                .ForMember(dest => dest.productType, opt => opt.MapFrom(src => src.ProductType.Name))     
+                .ForMember(dest => dest.pictureUrl, opt => opt.MapFrom<PictureUrlResolver>());           
 
             CreateMap<ProductBrand, BrandDto>();
             CreateMap<ProductType, TypeDto>();
         }
+
+
     }
 }

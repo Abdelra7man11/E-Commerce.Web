@@ -9,9 +9,8 @@ namespace Shared.DataTrancfareObject.IdentityDto
 {
     public class UserDTO
     {
-        [EmailAddress]
-        public string Email { get; set; } = default!;
-        public string Token { get; set; } = default!;
-        public string DisplayName { get; set; } = default!;
+        public string email { get; set; } = default!;
+        public string token { get; set; } = default!;
+        public string displayName { get; set; } = default!;
     }
 }
