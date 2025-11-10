@@ -12,7 +12,6 @@ namespace Presentation.Controllers
     public class OrdersController(IServiceManager _serviceManager) : ApiBaseController
     {
         //Create Order
-
         [HttpPost]
         public async Task<ActionResult<OrderToReturnDTo>> CreateAsync(OrderDTo orderDTo)
         {
@@ -30,7 +29,6 @@ namespace Presentation.Controllers
         }
 
         // Get All  Order By Email
-       
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OrderToReturnDTo>>> GetAllOrders()
         {
@@ -40,7 +38,6 @@ namespace Presentation.Controllers
         }
 
         // GEt Order By Id
-       
         [HttpGet("{id:guid}")]
         public async Task<ActionResult<OrderToReturnDTo>> Get(Guid id)
         {
