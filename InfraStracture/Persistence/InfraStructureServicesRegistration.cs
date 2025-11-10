@@ -1,6 +1,4 @@
-﻿
-
-using DomainLayer.Models.Identity;
+﻿using DomainLayer.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Persistence.Identity;
@@ -8,9 +6,9 @@ using StackExchange.Redis;
 
 namespace Persistence
 {
-    public static class InfraStractureServicesRegistration
+    public static class InfraStructureServicesRegistration
     {
-        public static IServiceCollection AddInfraStractureServices(this IServiceCollection Services, IConfiguration Configuration)
+        public static IServiceCollection AddInfraStructureServices(this IServiceCollection Services, IConfiguration Configuration)
         {
 
 

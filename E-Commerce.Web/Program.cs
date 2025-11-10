@@ -45,7 +45,7 @@ namespace E_Commerce.Web
 
 
             builder.Services.AddSwagerServices();
-            builder.Services.AddInfraStractureServices(builder.Configuration);
+            builder.Services.AddInfraStructureServices(builder.Configuration);
             builder.Services.AddApplicationServices();
             builder.Services.AddWebApplicationServices();
             builder.Services.AddJWTServices(builder.Configuration);
